@@ -1,0 +1,21 @@
+timezone: UTC
+
+_export:
+  hoge: 1
+  rb:
+    require: 'tasks/rb_workflow'
+
++setup:
+  echo>: start ${session_time}
+
++disp_current_date:
+  echo>: ${moment(session_time).utc().format('YYYY-MM-DD HH:mm:ss Z')}
+
++pre:
+  rb>: RbWorkflow.setup
+
++exe:
+  rb>: RbWorkflow.execute
+
++teardown:
+  echo>: finish ${session_time}
