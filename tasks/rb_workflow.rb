@@ -1,9 +1,12 @@
+require 'net/http'
+require 'uri'
+require 'json'
+
 require "bundler/inline"
 gemfile(true) do
   source 'https://rubygems.org'
   gem 'rugged'
 end
-
 
 class RbWorkflow
   def setup
@@ -17,5 +20,14 @@ class RbWorkflow
     branch = repo.branches.each_name(:remote) do |n|
       puts n
     end
+  end
+
+  def notify
+    url = URI.parse("https://hooks.slack.com/services/hogehoge")
+    payload = {
+      text: "テストメッセージ",
+      channel: "#personal",
+    }
+    Net::HTTP.post_form(url, { payload: payload.to_json })
   end
 end

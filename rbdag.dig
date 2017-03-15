@@ -17,5 +17,8 @@ _export:
 +exe:
   rb>: RbWorkflow.execute
 
++notify:
+  rb>: RbWorkflow.notify
+
 +teardown:
   echo>: finish ${session_time}
